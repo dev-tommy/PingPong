@@ -22,3 +22,23 @@ void __fastcall Tfr_GameWindow::FormClose(TObject *Sender,
   fr_GameWindow->Visible = false;
 }
 //---------------------------------------------------------------------------
+
+void Tfr_GameWindow::showGameWindow() {
+  int screenWidth, screenHeight, gameWindowWidth, gameWindowHeight;
+
+  screenWidth = Screen->Width;
+  screenHeight = Screen->Height;
+  gameWindowWidth = fr_GameWindow->Width;
+  gameWindowHeight = fr_GameWindow->Height;
+
+  if (screenWidth < gameWindowWidth  || screenHeight < gameWindowHeight) {
+    fr_GameWindow->WindowState = wsMaximized;
+  }
+
+  fr_ConfigWindow->Visible = false;
+  fr_GameWindow->Visible = true;
+}
+
+void Tfr_GameWindow::startGame() {
+  showGameWindow();
+}

@@ -32,18 +32,8 @@ void __fastcall Tfr_ConfigWindow::FormClose(TObject *Sender,
 //---------------------------------------------------------------------------
 void __fastcall Tfr_ConfigWindow::bt_NewGameClick(TObject *Sender)
 {
-  int screenWidth, screenHeight, gameWindowWidth, gameWindowHeight;
-
-  screenWidth = Screen->Width;
-  screenHeight = Screen->Height;
-  gameWindowWidth = fr_GameWindow->Width;
-  gameWindowHeight = fr_GameWindow->Height;
-
-  if (screenWidth < gameWindowWidth  || screenHeight < gameWindowHeight) {
-    fr_GameWindow->WindowState = wsMaximized;
-  }
-
-  fr_ConfigWindow->Visible = false;
-  fr_GameWindow->Visible = true;
+  fr_GameWindow->startGame();
 }
 //---------------------------------------------------------------------------
+
+

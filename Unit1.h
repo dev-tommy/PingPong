@@ -23,7 +23,8 @@ __published:	// IDE-managed Components
   void __fastcall bt_NewGameClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
-        __fastcall Tfr_ConfigWindow(TComponent* Owner);
+  __fastcall Tfr_ConfigWindow(TComponent* Owner);
+
 };
 //---------------------------------------------------------------------------
 extern PACKAGE Tfr_ConfigWindow *fr_ConfigWindow;

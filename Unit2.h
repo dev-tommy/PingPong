@@ -21,6 +21,10 @@ __published:	// IDE-managed Components
 private:	// User declarations
 public:		// User declarations
   __fastcall Tfr_GameWindow(TComponent* Owner);
+
+  void startGame();
+  void showGameWindow();
+
 };
 //---------------------------------------------------------------------------
 extern PACKAGE Tfr_GameWindow *fr_GameWindow;
