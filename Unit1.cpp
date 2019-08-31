@@ -7,15 +7,15 @@
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-Tfr_GameWindow *fr_GameWindow;
+Tfr_ConfigWindow *fr_ConfigWindow;
 //---------------------------------------------------------------------------
-__fastcall Tfr_GameWindow::Tfr_GameWindow(TComponent* Owner)
+__fastcall Tfr_ConfigWindow::Tfr_ConfigWindow(TComponent* Owner)
         : TForm(Owner)
 {
 }
 //---------------------------------------------------------------------------
 
-void __fastcall Tfr_GameWindow::bt_CloseGameClick(TObject *Sender)
+void __fastcall Tfr_ConfigWindow::bt_CloseGameClick(TObject *Sender)
 {
   if( Application->MessageBoxA("Czy na pewno chcesz zakoñczyæ grê?","Koniec gry",
   MB_YESNO | MB_ICONQUESTION) == IDYES ) {
@@ -23,9 +23,9 @@ void __fastcall Tfr_GameWindow::bt_CloseGameClick(TObject *Sender)
   }
 }
 //---------------------------------------------------------------------------
-void __fastcall Tfr_GameWindow::FormClose(TObject *Sender,
+void __fastcall Tfr_ConfigWindow::FormClose(TObject *Sender,
       TCloseAction &Action)
 {
-  fr_GameWindow->bt_CloseGameClick(Sender);
+  fr_ConfigWindow->bt_CloseGameClick(Sender);
 }
 //---------------------------------------------------------------------------

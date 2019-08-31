@@ -1,5 +1,5 @@
-object fr_GameWindow: Tfr_GameWindow
-  Left = 1438
+object fr_ConfigWindow: Tfr_ConfigWindow
+  Left = 784
   Top = 260
   BorderStyle = bsToolWindow
   Caption = 'PingPong v1.0 by Tomasz F.'

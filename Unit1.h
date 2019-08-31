@@ -9,7 +9,7 @@
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
 //---------------------------------------------------------------------------
-class Tfr_GameWindow : public TForm
+class Tfr_ConfigWindow : public TForm
 {
 __published:	// IDE-managed Components
   TTimer *tm_MainGame;
@@ -24,10 +24,10 @@ __published:	// IDE-managed Components
   void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 private:	// User declarations
 public:		// User declarations
-        __fastcall Tfr_GameWindow(TComponent* Owner);
+        __fastcall Tfr_ConfigWindow(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
-extern PACKAGE Tfr_GameWindow *fr_GameWindow;
+extern PACKAGE Tfr_ConfigWindow *fr_ConfigWindow;
 //---------------------------------------------------------------------------
 #endif
  
