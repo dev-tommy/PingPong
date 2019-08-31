@@ -17,13 +17,24 @@ __published:	// IDE-managed Components
   TTimer *tm_PlayerOne;
   TTimer *tm_PlayerTwo;
   TTimer *tm_Ball;
+  TTimer *tm_Counter;
+  TLabel *lb_CounterText;
+  TLabel *lb_Counter;
   void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
+  void __fastcall tm_CounterTimer(TObject *Sender);
 private:	// User declarations
+  bool runGame;
+  bool pauseGame;
+
+  void showGameWindow();
+  void gameStateReset();
+  void countdownToStartGame(int numberOfseconds);
 public:		// User declarations
   __fastcall Tfr_GameWindow(TComponent* Owner);
 
   void startGame();
-  void showGameWindow();
+
+
 
 };
 //---------------------------------------------------------------------------

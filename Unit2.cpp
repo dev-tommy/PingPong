@@ -13,6 +13,7 @@ Tfr_GameWindow *fr_GameWindow;
 __fastcall Tfr_GameWindow::Tfr_GameWindow(TComponent* Owner)
   : TForm(Owner)
 {
+  gameStateReset();
 }
 //---------------------------------------------------------------------------
 void __fastcall Tfr_GameWindow::FormClose(TObject *Sender,
@@ -41,4 +42,35 @@ void Tfr_GameWindow::showGameWindow() {
 
 void Tfr_GameWindow::startGame() {
   showGameWindow();
+  countdownToStartGame(5);
+  runGame = true;
+  //showGameResult();
 }
+
+void Tfr_GameWindow::gameStateReset() {
+  runGame = false;
+  pauseGame = false;
+}
+
+void Tfr_GameWindow::countdownToStartGame(int numberOfseconds) {
+  lb_CounterText->Visible = true;
+  lb_Counter->Caption = IntToStr(numberOfseconds);
+  lb_Counter->Visible = true;
+  tm_Counter->Enabled = true;
+}
+
+void __fastcall Tfr_GameWindow::tm_CounterTimer(TObject *Sender)
+{
+  int timeLeft = StrToInt(lb_Counter->Caption);
+  timeLeft--;
+  if (timeLeft <0) {
+    tm_Counter->Enabled = false;
+    lb_CounterText->Visible = false;
+    lb_Counter->Visible = false;
+  } else {
+    lb_Counter->Caption = IntToStr(timeLeft);
+  }
+}
+//---------------------------------------------------------------------------
+
+

@@ -37,3 +37,4 @@ void __fastcall Tfr_ConfigWindow::bt_NewGameClick(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
+
