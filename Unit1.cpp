@@ -38,3 +38,13 @@ void __fastcall Tfr_ConfigWindow::bt_NewGameClick(TObject *Sender)
 
 
 
+void __fastcall Tfr_ConfigWindow::rg_GameModeClick(TObject *Sender)
+{
+  if (rg_GameMode->ItemIndex == 1) {
+    rg_DifficultyLevel->Enabled = true;
+  } else {
+    rg_DifficultyLevel->Enabled = false;
+  }
+}
+//---------------------------------------------------------------------------
+

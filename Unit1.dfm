@@ -69,6 +69,7 @@ object fr_ConfigWindow: Tfr_ConfigWindow
         'Gracz vs CPU')
       ParentFont = False
       TabOrder = 0
+      OnClick = rg_GameModeClick
     end
     object rg_DifficultyLevel: TRadioGroup
       Left = 16
