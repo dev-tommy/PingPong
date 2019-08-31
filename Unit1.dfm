@@ -12,9 +12,9 @@ object fr_ConfigWindow: Tfr_ConfigWindow
   Font.Height = -21
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  FormStyle = fsStayOnTop
   OldCreateOrder = False
   Position = poScreenCenter
-  PrintScale = poNone
   OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 25
