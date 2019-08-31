@@ -14,9 +14,7 @@ class Tfr_GameWindow : public TForm
 {
 __published:	// IDE-managed Components
   TImage *im_Game;
-  TTimer *tm_PlayerOne;
-  TTimer *tm_PlayerTwo;
-  TTimer *tm_Ball;
+  TTimer *tm_RunGame;
   TTimer *tm_Counter;
   TLabel *lb_CounterText;
   TLabel *lb_Counter;
@@ -29,6 +27,8 @@ private:	// User declarations
   void showGameWindow();
   void gameStateReset();
   void countdownToStartGame(int numberOfseconds);
+  void showGameResult();
+
 public:		// User declarations
   __fastcall Tfr_GameWindow(TComponent* Owner);
 

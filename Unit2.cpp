@@ -41,10 +41,12 @@ void Tfr_GameWindow::showGameWindow() {
 }
 
 void Tfr_GameWindow::startGame() {
+  int refreshRate = 50; // Hz
   showGameWindow();
   countdownToStartGame(5);
   runGame = true;
-  //showGameResult();
+  tm_RunGame->Interval = 1000/refreshRate;
+  tm_RunGame->Enabled = true;
 }
 
 void Tfr_GameWindow::gameStateReset() {
@@ -59,6 +61,10 @@ void Tfr_GameWindow::countdownToStartGame(int numberOfseconds) {
   tm_Counter->Enabled = true;
 }
 
+void Tfr_GameWindow::showGameResult() {
+
+}
+
 void __fastcall Tfr_GameWindow::tm_CounterTimer(TObject *Sender)
 {
   int timeLeft = StrToInt(lb_Counter->Caption);
@@ -71,6 +77,8 @@ void __fastcall Tfr_GameWindow::tm_CounterTimer(TObject *Sender)
     lb_Counter->Caption = IntToStr(timeLeft);
   }
 }
+
+
 //---------------------------------------------------------------------------
 
 
