@@ -9,16 +9,25 @@
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
 //---------------------------------------------------------------------------
-class TForm1 : public TForm
+class Tfr_GameWindow : public TForm
 {
 __published:	// IDE-managed Components
-  TTimer *TimerMainGame;
+  TTimer *tm_MainGame;
+  TButton *bt_NewGame;
+  TImage *im_GameArea;
+  TPanel *pn_GameOptions;
+  TButton *bt_CloseGame;
+  TRadioGroup *rg_GameMode;
+  TRadioGroup *rg_DifficultyLevel;
+  TLabel *lb_GameName;
+  void __fastcall bt_CloseGameClick(TObject *Sender);
+  void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 private:	// User declarations
 public:		// User declarations
-        __fastcall TForm1(TComponent* Owner);
+        __fastcall Tfr_GameWindow(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
-extern PACKAGE TForm1 *Form1;
+extern PACKAGE Tfr_GameWindow *fr_GameWindow;
 //---------------------------------------------------------------------------
 #endif
  
