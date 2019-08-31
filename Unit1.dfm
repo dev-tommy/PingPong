@@ -1,8 +1,9 @@
 object fr_ConfigWindow: Tfr_ConfigWindow
-  Left = 784
-  Top = 260
+  Left = 486
+  Top = 325
+  BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsToolWindow
-  Caption = 'PingPong v1.0 by Tomasz F.'
+  Caption = 'PingPong v1.0 by dev-tommy'
   ClientHeight = 593
   ClientWidth = 345
   Color = clBtnFace
@@ -17,13 +18,6 @@ object fr_ConfigWindow: Tfr_ConfigWindow
   OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 25
-  object im_GameArea: TImage
-    Left = 288
-    Top = 112
-    Width = 41
-    Height = 41
-    Enabled = False
-  end
   object lb_GameName: TLabel
     Left = 48
     Top = 16
@@ -50,6 +44,7 @@ object fr_ConfigWindow: Tfr_ConfigWindow
     Font.Style = [fsBold, fsItalic]
     ParentFont = False
     TabOrder = 0
+    OnClick = bt_NewGameClick
   end
   object pn_GameOptions: TPanel
     Left = 64
@@ -110,11 +105,5 @@ object fr_ConfigWindow: Tfr_ConfigWindow
     ParentFont = False
     TabOrder = 2
     OnClick = bt_CloseGameClick
-  end
-  object tm_MainGame: TTimer
-    Enabled = False
-    Interval = 20
-    Left = 296
-    Top = 168
   end
 end

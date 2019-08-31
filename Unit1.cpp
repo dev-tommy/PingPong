@@ -4,6 +4,7 @@
 #pragma hdrstop
 
 #include "Unit1.h"
+#include "Unit2.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
@@ -27,5 +28,12 @@ void __fastcall Tfr_ConfigWindow::FormClose(TObject *Sender,
       TCloseAction &Action)
 {
   fr_ConfigWindow->bt_CloseGameClick(Sender);
+}
+//---------------------------------------------------------------------------
+void __fastcall Tfr_ConfigWindow::bt_NewGameClick(TObject *Sender)
+{
+  fr_ConfigWindow->Visible = false;
+  fr_GameWindow->Visible = true;
+
 }
 //---------------------------------------------------------------------------
