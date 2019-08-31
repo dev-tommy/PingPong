@@ -12,7 +12,10 @@
 class Tfr_GameWindow : public TForm
 {
 __published:	// IDE-managed Components
-  TImage *Image1;
+  TImage *im_Game;
+  TTimer *tm_PlayerOne;
+  TTimer *tm_PlayerTwo;
+  TTimer *tm_Ball;
   void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 private:	// User declarations
 public:		// User declarations
