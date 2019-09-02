@@ -1,6 +1,6 @@
 object fr_ConfigWindow: Tfr_ConfigWindow
-  Left = 486
-  Top = 325
+  Left = 1339
+  Top = 352
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsToolWindow
   Caption = 'PingPong v1.0 by dev-tommy'

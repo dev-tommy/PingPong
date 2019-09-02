@@ -10,6 +10,7 @@
 #include <ExtCtrls.hpp>
 #include <Graphics.hpp>
 //---------------------------------------------------------------------------
+#include "Unit1.h"
 class Tfr_GameWindow : public TForm
 {
 __published:	// IDE-managed Components
@@ -20,6 +21,7 @@ __published:	// IDE-managed Components
   TLabel *lb_Counter;
   TShape *sh_PlayerOne;
   TShape *sh_PlayerTwo;
+  TShape *sh_Ball;
   void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
   void __fastcall tm_CounterTimer(TObject *Sender);
   void __fastcall tm_RunGameTimer(TObject *Sender);

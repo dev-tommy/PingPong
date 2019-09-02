@@ -9,6 +9,7 @@
 #include <Forms.hpp>
 #include <ExtCtrls.hpp>
 //---------------------------------------------------------------------------
+#include "Unit2.h"
 class Tfr_ConfigWindow : public TForm
 {
 __published:	// IDE-managed Components
