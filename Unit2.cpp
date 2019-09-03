@@ -8,10 +8,12 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 Tfr_GameWindow *fr_GameWindow;
+Player *gracz;
 //---------------------------------------------------------------------------
 __fastcall Tfr_GameWindow::Tfr_GameWindow(TComponent* Owner)
   : TForm(Owner)
 {
+  gracz = new Player(50);
   DoubleBuffered = true;
 }
 //---------------------------------------------------------------------------
@@ -43,6 +45,7 @@ void Tfr_GameWindow::showGameWindow() {
 void Tfr_GameWindow::startGame() {
   int refreshRate = 50; // Hz
   int countdownTime = 3; // seconds
+  
   gameStateReset();
   showGameWindow();
   countdownToStartGame(countdownTime);
@@ -162,6 +165,9 @@ void __fastcall Tfr_GameWindow::FormKeyDown(TObject *Sender, WORD &Key,
 
   if (Key == 'J') directionPlayerTwo = -1;
   if (Key == 'M') directionPlayerTwo = 1;
+
+  //if (Key == 'Z') gracz.move(1);
+
 }
 //---------------------------------------------------------------------------
 

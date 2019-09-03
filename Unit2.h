@@ -11,6 +11,7 @@
 #include <Graphics.hpp>
 //---------------------------------------------------------------------------
 #include "Unit1.h"
+#include "Player.h";
 class Tfr_GameWindow : public TForm
 {
 __published:	// IDE-managed Components
@@ -39,6 +40,7 @@ private:	// User declarations
   int directionBallX;
   int directionBallY;
 
+
   void showGameWindow();
   void gameStateReset();
   void countdownToStartGame(int numberOfseconds);
@@ -47,7 +49,7 @@ private:	// User declarations
 
 public:		// User declarations
   __fastcall Tfr_GameWindow(TComponent* Owner);
-
+  
   void startGame();
 
 
