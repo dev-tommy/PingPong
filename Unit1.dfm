@@ -3,7 +3,7 @@ object fr_ConfigWindow: Tfr_ConfigWindow
   Top = 352
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsToolWindow
-  Caption = 'PingPong v1.0 by dev-tommy'
+  Caption = 'PingPong (alfa) by dev-tommy'
   ClientHeight = 593
   ClientWidth = 345
   Color = clBtnFace

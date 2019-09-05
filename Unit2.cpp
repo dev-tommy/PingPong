@@ -8,21 +8,25 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 Tfr_GameWindow *fr_GameWindow;
-Player *gracz;
 //---------------------------------------------------------------------------
 __fastcall Tfr_GameWindow::Tfr_GameWindow(TComponent* Owner)
   : TForm(Owner)
 {
-  gracz = new Player(50);
   DoubleBuffered = true;
 }
 //---------------------------------------------------------------------------
 void __fastcall Tfr_GameWindow::FormClose(TObject *Sender,
       TCloseAction &Action)
 {
-  fr_ConfigWindow->Visible = true;
+  gameStateReset();
   fr_GameWindow->Visible = false;
-}
+  runGame = true;
+  pauseGame = true;
+  fr_GameWindow->tm_Counter->Enabled = false;
+  fr_GameWindow->tm_RunGame->Enabled = false;
+
+  fr_ConfigWindow->Visible = true;
+  }
 //---------------------------------------------------------------------------
 
 void Tfr_GameWindow::showGameWindow() {
@@ -55,11 +59,13 @@ void Tfr_GameWindow::startGame() {
   }
 
   tm_RunGame->Interval = 1000/refreshRate;
-  tm_RunGame->Enabled = true;
+  if (!pauseGame) tm_RunGame->Enabled = true;
 
   sh_PlayerOne->Visible = true;
   sh_PlayerTwo->Visible = true;
   sh_Ball->Visible = true;
+  lb_ScorePlayerOne->Visible = true;
+  lb_ScorePlayerTwo->Visible = true;
 
 }
 
@@ -110,6 +116,18 @@ void Tfr_GameWindow::showGameResult() {
 
 }
 
+void Tfr_GameWindow::stopGame(int playerNumber) {
+  if (playerNumber == 1) {
+    lb_ScorePlayerOne->Caption = IntToStr(StrToInt(lb_ScorePlayerOne->Caption)+1);
+  }
+  if (playerNumber == 2) {
+    lb_ScorePlayerTwo->Caption = IntToStr(StrToInt(lb_ScorePlayerTwo->Caption)+1);
+  }
+  //Sleep(200);
+  startGame();
+
+}
+
 void __fastcall Tfr_GameWindow::tm_CounterTimer(TObject *Sender)
 {
   int timeLeft = StrToInt(lb_Counter->Caption);
@@ -135,6 +153,7 @@ void __fastcall Tfr_GameWindow::tm_RunGameTimer(TObject *Sender)
   int maxShiftDownPlayerTwo = im_Game->Height - sh_PlayerTwo->Height;
   int marginPlayer = 10;
   int marginBall = 10;
+
   sh_PlayerOne->Top += directionPlayerOne*speedPlayerOne;
   sh_PlayerTwo->Top += directionPlayerTwo*speedPlayerTwo;
 
@@ -147,8 +166,11 @@ void __fastcall Tfr_GameWindow::tm_RunGameTimer(TObject *Sender)
   sh_Ball->Left += speedBall*directionBallX;
   sh_Ball->Top += speedBall*directionBallY;
 
-  if (sh_Ball->Left < marginBall) directionBallX *= -1;
-  if (sh_Ball->Left > (im_Game->Width-sh_Ball->Width - marginBall)) directionBallX *= -1;
+  if ((sh_Ball->Left < sh_PlayerOne->Left + sh_PlayerOne->Width) && (sh_Ball->Top > sh_PlayerOne->Top) && (sh_Ball->Top < sh_PlayerOne->Top + sh_PlayerOne->Height)) directionBallX *= -1;
+  if ( (sh_Ball->Left > sh_PlayerTwo->Left - sh_Ball->Width) && (sh_Ball->Top > sh_PlayerTwo->Top) && (sh_Ball->Top < sh_PlayerTwo->Top + sh_PlayerTwo->Height) ) directionBallX *= -1;
+
+  if (sh_Ball->Left < -sh_Ball->Width) stopGame(2);  //inc score player two
+  if (sh_Ball->Left >  im_Game->Width) stopGame(1);  //inc score player one
 
   if (sh_Ball->Top < marginBall) directionBallY *= -1;
   if (sh_Ball->Top > (im_Game->Height-sh_Ball->Height - marginBall)) directionBallY *= -1;
@@ -165,8 +187,6 @@ void __fastcall Tfr_GameWindow::FormKeyDown(TObject *Sender, WORD &Key,
 
   if (Key == 'J') directionPlayerTwo = -1;
   if (Key == 'M') directionPlayerTwo = 1;
-
-  //if (Key == 'Z') gracz.move(1);
 
 }
 //---------------------------------------------------------------------------
