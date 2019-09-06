@@ -180,6 +180,7 @@ void __fastcall Tfr_GameWindow::tm_RunGameTimer(TObject *Sender)
   sh_Ball->Left += speedBall* directionBallX;
   sh_Ball->Top += speedBall*directionBallY;
 
+  /*
   if ((sh_Ball->Left < sh_PlayerOne->Left + sh_PlayerOne->Width) && (sh_Ball->Top > sh_PlayerOne->Top) && (sh_Ball->Top < sh_PlayerOne->Top + sh_PlayerOne->Height)) {
     directionBallX *= -1;
     speedBall += 1;
@@ -188,6 +189,22 @@ void __fastcall Tfr_GameWindow::tm_RunGameTimer(TObject *Sender)
     directionBallX *= -1;
     speedBall += 1;
   }
+  */
+
+  if ( sh_Ball->Left <= sh_PlayerOne->Left + sh_PlayerOne->Width) {
+    if ((sh_Ball->Top+sh_Ball->Height >= sh_PlayerOne->Top) && (sh_Ball->Top <= sh_PlayerOne->Top + sh_PlayerOne->Height)) {
+      directionBallX *= -1;
+      speedBall += 1;
+    }
+  }
+
+  if ( sh_Ball->Left + sh_Ball->Width >= sh_PlayerTwo->Left) {
+    if ((sh_Ball->Top+sh_Ball->Height >= sh_PlayerTwo->Top) && (sh_Ball->Top <= sh_PlayerTwo->Top + sh_PlayerTwo->Height)) {
+      directionBallX *= -1;
+      speedBall += 1;
+    }
+  }
+
 
   if (sh_Ball->Left <= -sh_Ball->Width) stopGame(2);  //inc score player two
   if (sh_Ball->Left >=  im_Game->Width) stopGame(1);  //inc score player one
