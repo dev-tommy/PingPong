@@ -24,6 +24,8 @@ void __fastcall Tfr_GameWindow::FormClose(TObject *Sender,
   pauseGame = true;
   fr_GameWindow->tm_Counter->Enabled = false;
   fr_GameWindow->tm_RunGame->Enabled = false;
+  fr_GameWindow->lb_ScorePlayerOne->Caption = "0";
+  fr_GameWindow->lb_ScorePlayerTwo->Caption = "0";
 
   fr_ConfigWindow->Visible = true;
   }
@@ -123,7 +125,6 @@ void Tfr_GameWindow::stopGame(int playerNumber) {
   if (playerNumber == 2) {
     lb_ScorePlayerTwo->Caption = IntToStr(StrToInt(lb_ScorePlayerTwo->Caption)+1);
   }
-  //Sleep(200);
   startGame();
 
 }
@@ -149,12 +150,25 @@ void __fastcall Tfr_GameWindow::tm_CounterTimer(TObject *Sender)
 
 void __fastcall Tfr_GameWindow::tm_RunGameTimer(TObject *Sender)
 {
+
   int maxShiftDownPlayerOne = im_Game->Height - sh_PlayerOne->Height;
   int maxShiftDownPlayerTwo = im_Game->Height - sh_PlayerTwo->Height;
   int marginPlayer = 10;
   int marginBall = 10;
 
   sh_PlayerOne->Top += directionPlayerOne*speedPlayerOne;
+  if (fr_ConfigWindow->rg_DifficultyLevel->Enabled) {
+    if ((sh_Ball->Top + sh_Ball->Height) <= (sh_PlayerTwo->Top + sh_PlayerTwo->Height/2)) {
+      directionPlayerTwo = -1;
+    }
+    else if ((sh_Ball->Top) >= (sh_PlayerTwo->Top + sh_PlayerTwo->Height)) {
+      directionPlayerTwo = 1;
+    }
+    else {
+      directionPlayerTwo = 0;
+    }
+      speedPlayerTwo = 10 + fr_ConfigWindow->rg_DifficultyLevel->ItemIndex * 10;
+  }
   sh_PlayerTwo->Top += directionPlayerTwo*speedPlayerTwo;
 
   if (sh_PlayerOne->Top < marginPlayer) sh_PlayerOne->Top = marginPlayer;
@@ -163,14 +177,20 @@ void __fastcall Tfr_GameWindow::tm_RunGameTimer(TObject *Sender)
   if (sh_PlayerTwo->Top < marginPlayer) sh_PlayerTwo->Top = marginPlayer;
   if (sh_PlayerTwo->Top > maxShiftDownPlayerTwo - marginPlayer) sh_PlayerTwo->Top = maxShiftDownPlayerTwo - marginPlayer;
 
-  sh_Ball->Left += speedBall*directionBallX;
+  sh_Ball->Left += speedBall* directionBallX;
   sh_Ball->Top += speedBall*directionBallY;
 
-  if ((sh_Ball->Left < sh_PlayerOne->Left + sh_PlayerOne->Width) && (sh_Ball->Top > sh_PlayerOne->Top) && (sh_Ball->Top < sh_PlayerOne->Top + sh_PlayerOne->Height)) directionBallX *= -1;
-  if ( (sh_Ball->Left > sh_PlayerTwo->Left - sh_Ball->Width) && (sh_Ball->Top > sh_PlayerTwo->Top) && (sh_Ball->Top < sh_PlayerTwo->Top + sh_PlayerTwo->Height) ) directionBallX *= -1;
+  if ((sh_Ball->Left < sh_PlayerOne->Left + sh_PlayerOne->Width) && (sh_Ball->Top > sh_PlayerOne->Top) && (sh_Ball->Top < sh_PlayerOne->Top + sh_PlayerOne->Height)) {
+    directionBallX *= -1;
+    speedBall += 1;
+  }
+  if ((sh_Ball->Left > sh_PlayerTwo->Left - sh_Ball->Width) && (sh_Ball->Top > sh_PlayerTwo->Top) && (sh_Ball->Top < sh_PlayerTwo->Top + sh_PlayerTwo->Height) ) {
+    directionBallX *= -1;
+    speedBall += 1;
+  }
 
-  if (sh_Ball->Left < -sh_Ball->Width) stopGame(2);  //inc score player two
-  if (sh_Ball->Left >  im_Game->Width) stopGame(1);  //inc score player one
+  if (sh_Ball->Left <= -sh_Ball->Width) stopGame(2);  //inc score player two
+  if (sh_Ball->Left >=  im_Game->Width) stopGame(1);  //inc score player one
 
   if (sh_Ball->Top < marginBall) directionBallY *= -1;
   if (sh_Ball->Top > (im_Game->Height-sh_Ball->Height - marginBall)) directionBallY *= -1;
@@ -185,8 +205,10 @@ void __fastcall Tfr_GameWindow::FormKeyDown(TObject *Sender, WORD &Key,
   if (Key == 'A') directionPlayerOne = -1;
   if (Key == 'Z') directionPlayerOne = 1;
 
-  if (Key == 'J') directionPlayerTwo = -1;
-  if (Key == 'M') directionPlayerTwo = 1;
+  if (!fr_ConfigWindow->rg_DifficultyLevel->Enabled) {
+    if (Key == 'J') directionPlayerTwo = -1;
+    if (Key == 'M') directionPlayerTwo = 1;
+  }
 
 }
 //---------------------------------------------------------------------------
@@ -196,9 +218,10 @@ void __fastcall Tfr_GameWindow::FormKeyUp(TObject *Sender, WORD &Key,
 {
   if (Key == 'A') directionPlayerOne = 0;
   if (Key == 'Z') directionPlayerOne = 0;
-
-  if (Key == 'J') directionPlayerTwo = 0;
-  if (Key == 'M') directionPlayerTwo = 0;
+  if (!fr_ConfigWindow->rg_DifficultyLevel->Enabled) {
+    if (Key == 'J') directionPlayerTwo = 0;
+    if (Key == 'M') directionPlayerTwo = 0;
+  }  
 }
 //---------------------------------------------------------------------------
 

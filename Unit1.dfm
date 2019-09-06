@@ -1,6 +1,6 @@
 object fr_ConfigWindow: Tfr_ConfigWindow
-  Left = 1339
-  Top = 352
+  Left = 930
+  Top = 363
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsToolWindow
   Caption = 'PingPong (alfa) by dev-tommy'
@@ -16,6 +16,7 @@ object fr_ConfigWindow: Tfr_ConfigWindow
   OldCreateOrder = False
   Position = poScreenCenter
   OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 25
   object lb_GameName: TLabel

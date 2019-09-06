@@ -23,6 +23,7 @@ __published:	// IDE-managed Components
   void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
   void __fastcall bt_NewGameClick(TObject *Sender);
   void __fastcall rg_GameModeClick(TObject *Sender);
+  void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
   __fastcall Tfr_ConfigWindow(TComponent* Owner);

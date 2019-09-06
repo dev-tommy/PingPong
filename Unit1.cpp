@@ -47,3 +47,16 @@ void __fastcall Tfr_ConfigWindow::rg_GameModeClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+void __fastcall Tfr_ConfigWindow::FormCreate(TObject *Sender)
+{
+    Application->MessageBox("Witaj w grze PingPong!\n\n"
+                          "Sterowanie paletkami:\n"
+                          "Lewy gracz: A - w górê, Z - w dó³\n"
+                          "Prawy gracz: J - w górê, M - w dó³\n\n"
+                          "Udanej zabawy :) !",
+
+                          "PingPong", MB_OK);
+}
+//---------------------------------------------------------------------------
+
