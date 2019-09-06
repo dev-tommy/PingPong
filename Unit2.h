@@ -45,7 +45,6 @@ private:	// User declarations
   void showGameWindow();
   void gameStateReset();
   void countdownToStartGame(int numberOfseconds);
-  void showGameResult();
   void resetPlayersAndBallPosition();
 
 public:		// User declarations
