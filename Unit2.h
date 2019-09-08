@@ -24,6 +24,7 @@ __published:	// IDE-managed Components
   TShape *sh_Ball;
   TLabel *lb_ScorePlayerOne;
   TLabel *lb_ScorePlayerTwo;
+  TLabel *lb_Winner;
   void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
   void __fastcall tm_CounterTimer(TObject *Sender);
   void __fastcall tm_RunGameTimer(TObject *Sender);
@@ -42,6 +43,7 @@ private:	// User declarations
   int directionBallY;
 
   void stopGame(int playerNumber);
+  void exitGame();
   void showGameWindow();
   void gameStateReset();
   void countdownToStartGame(int numberOfseconds);

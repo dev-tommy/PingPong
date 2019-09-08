@@ -18,6 +18,11 @@ __fastcall Tfr_GameWindow::Tfr_GameWindow(TComponent* Owner)
 void __fastcall Tfr_GameWindow::FormClose(TObject *Sender,
       TCloseAction &Action)
 {
+  exitGame();
+}
+//---------------------------------------------------------------------------
+
+void Tfr_GameWindow::exitGame() {
   gameStateReset();
   fr_GameWindow->Visible = false;
   runGame = true;
@@ -28,9 +33,7 @@ void __fastcall Tfr_GameWindow::FormClose(TObject *Sender,
   fr_GameWindow->lb_ScorePlayerTwo->Caption = "0";
 
   fr_ConfigWindow->Visible = true;
-  }
-//---------------------------------------------------------------------------
-
+}
 void Tfr_GameWindow::showGameWindow() {
   int screenWidth, screenHeight, gameWindowWidth, gameWindowHeight;
 
@@ -82,6 +85,7 @@ void Tfr_GameWindow::gameStateReset() {
   sh_Ball->Visible = false;
   lb_Counter->Visible = false;
   lb_CounterText->Visible = false;
+  lb_Winner->Visible = false;
 
   speedPlayerOne = 40;
   speedPlayerTwo = 40;
@@ -116,6 +120,7 @@ void Tfr_GameWindow::countdownToStartGame(int numberOfseconds) {
 }
 
 void Tfr_GameWindow::stopGame(int playerNumber) {
+  const int MAX_SCORE = 10;
   //add score
   if (playerNumber == 1) {
     lb_ScorePlayerOne->Caption = IntToStr(StrToInt(lb_ScorePlayerOne->Caption)+1);
@@ -123,8 +128,23 @@ void Tfr_GameWindow::stopGame(int playerNumber) {
   if (playerNumber == 2) {
     lb_ScorePlayerTwo->Caption = IntToStr(StrToInt(lb_ScorePlayerTwo->Caption)+1);
   }
+  if (StrToInt(lb_ScorePlayerOne->Caption) >= MAX_SCORE || StrToInt(lb_ScorePlayerTwo->Caption) >= MAX_SCORE) {
+     if (StrToInt(lb_ScorePlayerOne->Caption) >= MAX_SCORE) {
+       lb_Winner->Caption = "Wygra³ gracz pierwszy !!!";
+     }
+     else {
+       lb_Winner->Caption = "Wygra³ gracz drugi !!!" ;
+     }  
+     lb_Winner->Visible = true;
+     Application->ProcessMessages();
+     Sleep(5000);
+     exitGame();
+     Application->ProcessMessages();
+     lb_ScorePlayerOne->Caption = "0";
+     lb_ScorePlayerTwo->Caption = "0";
+  } else {
   startGame();
-
+  }
 }
 
 void __fastcall Tfr_GameWindow::tm_CounterTimer(TObject *Sender)
@@ -211,6 +231,7 @@ void __fastcall Tfr_GameWindow::tm_RunGameTimer(TObject *Sender)
   if (sh_Ball->Top < marginBall) directionBallY *= -1;
   if (sh_Ball->Top > (im_Game->Height-sh_Ball->Height - marginBall)) directionBallY *= -1;
 
+  Application->ProcessMessages();
 }
 //---------------------------------------------------------------------------
 
